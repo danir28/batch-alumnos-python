@@ -15,12 +15,15 @@ while True:
     
     if opcion == '1':
         nombre = input('ingrese nombre del alumno: ')
-        nota = float(input('ingrese nota del alumno: '))
+        
+        try:
+            nota = float(input('ingrese nota del alumno: '))
+        except ValueError:
+            print('la nota debe ser un número')
+            continue
         resultado = agregar_alumno(alumnos, nombre, nota)
-        if not resultado['ok']:
-            print('el alumno ya existe')
-        else:
-            print('alumno agregado exitosamente')
+        print(resultado)
+        
     elif opcion == '2':
         estadisticas = calcular_estadisticas(alumnos)
         if not estadisticas:
@@ -32,6 +35,7 @@ while True:
             print(f"Desaprobados: {estadisticas['desaprobados']}")
             print(f"Nota más alta: {estadisticas['maximo']}")
             print(f"Nota más baja: {estadisticas['minimo']}")
+            
     elif opcion == '3':
         print('saliendo...')
         break
