@@ -17,35 +17,15 @@ def agregar_alumno(alumnos, nombre, nota):
     alumnos[nombre] = nota
     return 'alumno agregado'
     
-def calcular_estadisticas(diccionario):
-    if not diccionario:
-        return {}
+def calcular_estadisticas(alumnos):
+    if not alumnos:
+        return None
     
-    cantidad = 0
-    suma = 0
-    aprobados = 0
-    desaprobados = 0
-    nota_maxima = -1
-    nota_minima = 11
+    notas = alumnos.values()
     
-    for nota in diccionario.values():
-        cantidad += 1
-        suma += nota
-        
-        if nota >= 7:
-            aprobados += 1
-        else:
-            desaprobados += 1
-            
-        if nota > nota_maxima:
-            nota_maxima = nota
-        if nota < nota_minima:
-            nota_minima = nota
-            
     return {
-        'promedio': suma / cantidad,
-        'aprobados': aprobados,
-        'desaprobados': desaprobados,
-        'maximo': nota_maxima,
-        'minimo': nota_minima
+        'cantidad': len(alumnos),
+        'promedio': sum(notas) / len(alumnos),
+        'maximo': max(notas),
+        'minimo': min(notas),
     }

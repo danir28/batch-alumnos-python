@@ -3,6 +3,7 @@ Inputs
 Prints
 Llama funciones"""
 from batch_alumnos.core.logic import agregar_alumno, calcular_estadisticas
+from utils.formato import mostrar_estadisticas
 
 alumnos = {}
 while True:
@@ -26,18 +27,12 @@ while True:
         
     elif opcion == '2':
         estadisticas = calcular_estadisticas(alumnos)
-        if not estadisticas:
-            print("No hay alumnos cargados.")
-        else:
-            print("\n📊 Estadísticas:")
-            print(f"Promedio de notas: {estadisticas['promedio']:.2f}")
-            print(f"Aprobados: {estadisticas['aprobados']}")
-            print(f"Desaprobados: {estadisticas['desaprobados']}")
-            print(f"Nota más alta: {estadisticas['maximo']}")
-            print(f"Nota más baja: {estadisticas['minimo']}")
-            
+        salida = mostrar_estadisticas(estadisticas)
+        print(salida)
+                    
     elif opcion == '3':
         print('saliendo...')
         break
+    
     else:
         print("Opción no válida. Intente de nuevo.")
