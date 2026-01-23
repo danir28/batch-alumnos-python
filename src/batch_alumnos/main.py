@@ -16,15 +16,18 @@ while True:
     if opcion == '1':
         nombre = input('ingrese nombre del alumno: ')
         nota = float(input('ingrese nota del alumno: '))
-        alumno_agregado = agregar_alumno(alumnos, nombre, nota)
-        print(alumno_agregado)
+        resultado = agregar_alumno(alumnos, nombre, nota)
+        if not resultado['ok']:
+            print('el alumno ya existe')
+        else:
+            print('alumno agregado exitosamente')
     elif opcion == '2':
         estadisticas = calcular_estadisticas(alumnos)
-        if estadisticas == 0:
+        if not estadisticas:
             print("No hay alumnos cargados.")
         else:
             print("\n📊 Estadísticas:")
-            print(f"Promedio de notas: {estadisticas['promedio']}")
+            print(f"Promedio de notas: {estadisticas['promedio']:.2f}")
             print(f"Aprobados: {estadisticas['aprobados']}")
             print(f"Desaprobados: {estadisticas['desaprobados']}")
             print(f"Nota más alta: {estadisticas['maximo']}")

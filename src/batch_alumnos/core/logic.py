@@ -5,20 +5,19 @@ Contar aprobados y desaprobados"""
 
 def agregar_alumno(diccionario, nombre, nota):
     if nombre in diccionario:
-        return 'alumno existente'
-    else:
-        diccionario[nombre] = nota
-        return 'alumno agregado'
+        return {
+            'ok': False,
+            'error': 'alumno_existente'
+        }
+    diccionario[nombre] = nota
+    return {
+        'ok': True
+    }
     
 def calcular_estadisticas(diccionario):
     if not diccionario:
-        return {
-            'promedio': 0,
-            'aprobados': 0,
-            'desaprobados': 0,
-            'maximo': 0,
-            'minimo': 0
-        }
+        return {}
+    
     cantidad = 0
     suma = 0
     aprobados = 0
@@ -30,7 +29,7 @@ def calcular_estadisticas(diccionario):
         cantidad += 1
         suma += nota
         
-        if nota >= 6:
+        if nota >= 7:
             aprobados += 1
         else:
             desaprobados += 1
@@ -40,10 +39,8 @@ def calcular_estadisticas(diccionario):
         if nota < nota_minima:
             nota_minima = nota
             
-    promedio = suma / cantidad
-    
     return {
-        'promedio': promedio,
+        'promedio': suma / cantidad,
         'aprobados': aprobados,
         'desaprobados': desaprobados,
         'maximo': nota_maxima,
