@@ -6,16 +6,16 @@ from core.logic import validar_nombre, validar_nota, existe_nombre
 
 def agregar_alumno(alumnos, nombre, nota):
     if not validar_nombre(nombre):
-        return 'nombre inválido'
+        return False, 'nombre inválido'
     
     if existe_nombre(nombre, alumnos):
-        return 'alumno existente'
+        return False, 'alumno existente'
     
     if not validar_nota(nota):
-        return 'nota invalida'
+        return False, 'nota invalida'
     
     alumnos[nombre] = nota
-    return 'alumno agregado'
+    return True, 'alumno agregado'
     
 def calcular_estadisticas(alumnos):
     if not alumnos:

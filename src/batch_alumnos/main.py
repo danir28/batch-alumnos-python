@@ -22,8 +22,8 @@ while True:
         except ValueError:
             print('la nota debe ser un número')
             continue
-        resultado = agregar_alumno(alumnos, nombre, nota)
-        print(resultado)
+        ok, mensaje = agregar_alumno(alumnos, nombre, nota)
+        print(mensaje)  
         
     elif opcion == '2':
         estadisticas = calcular_estadisticas(alumnos)
