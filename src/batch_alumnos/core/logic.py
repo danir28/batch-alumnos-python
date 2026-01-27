@@ -2,7 +2,8 @@
 Calcular promedio
 Contar aprobados y desaprobados"""
 #Usa modelos + utils para hacer lógica de negocio.
-from core.logic import validar_nombre, validar_nota, existe_nombre
+from utils.validaciones import validar_nombre, validar_nota, existe_nombre
+from models.alumnos import Alumno
 
 OK = 0
 NOMBRE_INVALIDO = 1
@@ -10,17 +11,9 @@ NOTA_INVALIDA = 2
 ALUMNO_EXISTE = 3
 
 def agregar_alumno(alumnos, nombre, nota):
-    if not validar_nombre(nombre):
-        return NOMBRE_INVALIDO
-    
-    if existe_nombre(nombre, alumnos):
-        return ALUMNO_EXISTE
-    
-    if not validar_nota(nota):
-        return NOTA_INVALIDA
-    
-    alumnos[nombre] = nota
-    return OK
+    alumno = Alumno(nombre, nota)
+    alumnos[nombre] = alumno
+    return 0
     
 def calcular_estadisticas(alumnos):
     if not alumnos:
