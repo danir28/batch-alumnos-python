@@ -8,3 +8,10 @@ class Alumno:
     def __init__(self, nombre: str, nota: float):
         self.nombre = nombre
         self.nota = nota
+    
+    def esta_aprobado(self):
+        return self.nota >= 6
+    
+    def __str__(self):
+        return f"{self.nombre} - Nota: {self.nota}"
+    

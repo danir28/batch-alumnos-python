@@ -11,19 +11,26 @@ NOTA_INVALIDA = 2
 ALUMNO_EXISTE = 3
 
 def agregar_alumno(alumnos, nombre, nota):
+    if not validar_nombre(nombre):
+        return False, NOMBRE_INVALIDO
+    if not validar_nota(nota):
+        return False, NOTA_INVALIDA
+    if existe_nombre(nombre, alumnos):
+        return False, ALUMNO_EXISTE
+    
     alumno = Alumno(nombre, nota)
-    alumnos[nombre] = alumno
-    return 0
+    alumnos[nombre] = alumno.nota
+    return True, OK
     
 def calcular_estadisticas(alumnos):
     if not alumnos:
         return None
-    
-    notas = alumnos.values()
-    
+
+    notas = [alumno.nota for alumno in alumnos.values()]
+
     return {
-        'cantidad': len(alumnos),
-        'promedio': sum(notas) / len(alumnos),
+        'cantidad': len(notas),
+        'promedio': sum(notas) / len(notas),
         'maximo': max(notas),
         'minimo': min(notas),
     }
